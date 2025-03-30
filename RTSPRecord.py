@@ -41,7 +41,7 @@ class Stream:
         self.streamUsername = streamUsername
         self.streamPassword = streamPassword
         self.streamPath = streamPath
-        self.recordPath = StorageLocation(recordPath)
+        self.recordPath = StorageLocation(recordPath, streamName)
         self.recordingSegmentDuration = recordingSegmentDuration
         self.rtspUrl = self.createRtspUrl()
 
@@ -66,19 +66,19 @@ class Recording:
         while True:
             while streamObject.recordPath.getDirectorySize() < streamObject.recordPath.maxSize:
                 current_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-                recording_filename = f"{streamObject.recordPath.directory}_{current_time}.mp4"
-                recording_path = streamObject.recordPath.directory + "/" + recording_filename
+                recording_filename = f"{streamObject.recordPath.directoryPath}/{current_time}.mp4"
+                # recording_path = streamObject.recordPath.directoryPath + "/" + recording_filename
 
-                ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -i {streamObject.rtspUrl} -c:v copy -c:a copy -f mp4 {recording_path}", shell=True)
-                time.sleep(streamObject.recordingSegmentDuration)
+                ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -i {streamObject.rtspUrl} -c:v copy -c:a copy -f mp4 {recording_filename}", shell=True)
+                time.sleep(int(streamObject.recordingSegmentDuration))
                 ffmpeg_process.terminate()
             else:
                 streamObject.recordPath.deleteOldestFile()
             
 class StorageLocation:
-    def __init__(self, generalDirectory):
+    def __init__(self, generalDirectory, streamName):
         self.generalDirectory = generalDirectory
-        self.createDirectory()
+        self.createDirectory(streamName)
         self.setMaxSize()
 
     def getDirectorySize(self):
