@@ -53,8 +53,8 @@ class Recording:
     def __init__(self):
         pass
     
-    def recordAllStreams(self, streamList):
-        for i in streamList:
+    def recordAllStreams(self, streamListObject):
+        for i in streamListObject.streamList:
             self.startRecordingProcess(i)
 
     def startRecordingProcess(self, streamObject):
