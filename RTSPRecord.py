@@ -69,7 +69,7 @@ class Recording:
                 recording_filename = f"{streamObject.recordPath.directoryPath}/{current_time}.mp4"
                 # recording_path = streamObject.recordPath.directoryPath + "/" + recording_filename
 
-                ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -i {streamObject.rtspUrl} -c:v copy -c:a copy -f mp4 {recording_filename}", shell=True)
+                ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -i {streamObject.rtspUrl} -c:v copy -c:a aac -b:a 128k -movflags +faststart -f mp4 {recording_filename}", shell=True)
                 time.sleep(int(streamObject.recordingSegmentDuration))
                 ffmpeg_process.terminate()
             else:
@@ -87,7 +87,7 @@ class StorageLocation:
             for f in filenames:
                 fp = os.path.join(dirpath, f)
                 directorySize += os.path.getsize(fp)
-        return directorySize
+        return directorySize / 1000000000
 
     def createDirectory(self, streamName):
         self.directoryPath = os.path.join(self.generalDirectory, streamName)
@@ -107,9 +107,9 @@ class StorageLocation:
                     break
     
     def deleteOldestFile(self):
-        files = os.listdir(self.directory)
+        files = os.listdir(self.directoryPath)
         oldest_file = min(files, key=lambda f: datetime.strptime(f.split(".")[0], "%Y-%m-%d_%H-%M-%S"))
-        file_path = os.path.join(self.directory, oldest_file)
+        file_path = os.path.join(self.directoryPath, oldest_file)
         os.remove(file_path)
 
 class Main:
