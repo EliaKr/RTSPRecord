@@ -95,10 +95,14 @@ class StorageLocation:
 
 
     def setMaxSize(self):
-        with open('/home/elias/Documents/repos/RTSPRecord/config.txt', 'r') as file:
+        with open('config.txt', 'r') as file:
             for line in file:
                 if line.startswith('directoryMaxSize'):
-                    self.maxSize = int(line.split('=')[1].strip())
+                    max_size = line.split('=')[1].strip()
+                    try:
+                        self.maxSize = int(max_size)
+                    except ValueError:
+                        print("Invalid value for directoryMaxSize in the config file.")
                     break
     
     def deleteOldestFile(self):
