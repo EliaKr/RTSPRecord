@@ -19,7 +19,7 @@ class StreamList:
             streamListDictionary = json.load(streamListFile)
             for streamNameKey in streamListDictionary.keys():
                 streamObject = self.createStreamObject(streamNameKey, streamListDictionary)
-                streamList.add(streamObject)
+                streamList.append(streamObject)
         return streamList
 
     def createStreamObject(self, streamNameKey, streamListDictionary):
