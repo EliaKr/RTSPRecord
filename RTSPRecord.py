@@ -58,7 +58,7 @@ class Recording:
             self.startRecordingProcess(i)
 
     def startRecordingProcess(self, streamObject):
-        newProcess = multiprocessing.Process(self.startLoopedRecording, streamObject)
+        newProcess = multiprocessing.Process(target=self.startLoopedRecording, args=(streamObject,))
         newProcess.start()
         print(f"Started process for {streamObject.streamName} with ID: {newProcess.pid}")
 
@@ -78,6 +78,7 @@ class Recording:
 class StorageLocation:
     def __init__(self, generalDirectory):
         self.generalDirectory = generalDirectory
+        self.createDirectory()
         self.setMaxSize()
 
     def getDirectorySize(self):
