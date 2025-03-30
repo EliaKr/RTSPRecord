@@ -1,0 +1,11 @@
+{
+    "CameraName": {
+        "address": "your_rtsp_address",
+        "port": "your_rtsp_port",
+        "username": "your_username",
+        "password": "your_password",
+        "streamPath": "your_stream_path",
+        "recordPath": "your_general_record_path",
+        "recordingSegmentDuration": "duration_in_seconds"
+    }
+}
