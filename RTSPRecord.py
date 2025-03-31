@@ -16,17 +16,19 @@ class StreamList:
     def loadStreamList(self):
         streamList = []
         with open("streamlist.json", "r") as streamListFile:
-            streamListDictionary = json.load(streamListFile)
-            for streamNameKey in streamListDictionary.keys():
-                streamObject = self.createStreamObject(streamNameKey, streamListDictionary)
-                streamList.append(streamObject)
+            streamImportList = json.load(streamListFile)
+            print(streamImportList)
+            for streamListDictionary in streamImportList:
+                for streamNameKey in streamListDictionary.keys():
+                    streamObject = self.createStreamObject(streamNameKey, streamListDictionary)
+                    streamList.append(streamObject)
         return streamList
 
     def createStreamObject(self, streamNameKey, streamListDictionary):
         tempStreamObject = Stream()
         tempStreamObject.setInfo(streamNameKey, streamListDictionary[streamNameKey]['address'], streamListDictionary[streamNameKey]['port'], streamListDictionary[streamNameKey]['username'], streamListDictionary[streamNameKey]['password'], streamListDictionary[streamNameKey]['streamPath'], streamListDictionary[streamNameKey]['recordPath'], streamListDictionary[streamNameKey]['recordingSegmentDuration'])
         return tempStreamObject
-    
+
     def getStreamList(self):
         return self.streamList
 

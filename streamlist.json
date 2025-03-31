@@ -1,11 +1,46 @@
-{
-    "CameraName": {
-        "address": "your_rtsp_address",
-        "port": "your_rtsp_port",
-        "username": "your_username",
-        "password": "your_password",
-        "streamPath": "your_stream_path",
-        "recordPath": "your_general_record_path",
-        "recordingSegmentDuration": "duration_in_seconds"
+[
+    {
+        "StreamName1": {
+            "address": "your_rtsp_address",
+            "port": "your_rtsp_port",
+            "username": "your_username",
+            "password": "your_password",
+            "streamPath": "your_stream_path",
+            "recordPath": "your_general_record_path",
+            "recordingSegmentDuration": "duration_in_seconds"
+        }
+    },
+    {
+        "StreamName2": {
+            "address": "your_rtsp_address",
+            "port": "your_rtsp_port",
+            "username": "your_username",
+            "password": "your_password",
+            "streamPath": "your_stream_path",
+            "recordPath": "your_general_record_path",
+            "recordingSegmentDuration": "duration_in_seconds"
+        }
+    },
+    {
+        "StreamName3": {
+            "address": "your_rtsp_address",
+            "port": "your_rtsp_port",
+            "username": "your_username",
+            "password": "your_password",
+            "streamPath": "your_stream_path",
+            "recordPath": "your_general_record_path",
+            "recordingSegmentDuration": "duration_in_seconds"
+        }
+    },
+    {
+        "StreamName4": {
+            "address": "your_rtsp_address",
+            "port": "your_rtsp_port",
+            "username": "your_username",
+            "password": "your_password",
+            "streamPath": "your_stream_path",
+            "recordPath": "your_general_record_path",
+            "recordingSegmentDuration": "duration_in_seconds"
+        }
     }
-}
+]
