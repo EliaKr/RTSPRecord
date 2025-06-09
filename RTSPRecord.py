@@ -72,6 +72,8 @@ class Recording:
                 # recording_path = streamObject.recordPath.directoryPath + "/" + recording_filename
 
                 ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -i {streamObject.rtspUrl} -c:v copy -c:a aac -b:a 128k -movflags +faststart -f mp4 {recording_filename}", shell=True)
+                # For lower resource usage copy the audio stream. You can also use this command to lower memory usage:
+                # ffmpeg_process = subprocess.Popen(f"ffmpeg -rtsp_transport tcp -fflags nobuffer -i {streamObject.rtspUrl} -c:v copy -an -movflags +faststart -f mp4 {recording_filename}", shell=True)
                 time.sleep(int(streamObject.recordingSegmentDuration))
                 ffmpeg_process.terminate()
             else:
